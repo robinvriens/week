@@ -1,0 +1,30 @@
+{
+  "name": "web",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000 --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@workspace/ui": "workspace:*",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.3.0",
+    "@workspace/eslint": "workspace:*",
+    "@workspace/typescript": "workspace:*",
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.30.0",
+    "typescript": "5.8.2"
+  }
+}
