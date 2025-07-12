@@ -1,0 +1,28 @@
+{
+  "name": "@workspace/db",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "db:generate": "drizzle-kit generate --name $1",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "drizzle-orm": "^0.44.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.4",
+    "@workspace/eslint": "workspace:*",
+    "@workspace/typescript": "workspace:*",
+    "drizzle-kit": "^0.31.4",
+    "tsup": "^8.5.0"
+  }
+}
