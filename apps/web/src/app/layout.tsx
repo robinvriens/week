@@ -1,8 +1,8 @@
 import '@workspace/ui/globals.css';
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
-import { cn } from '@workspace/ui/lib/utils';
 
+import { cn } from '@workspace/ui/lib/utils';
+import { Geist } from 'next/font/google';
 const geist = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html className="dark" lang="en">
       <body className={cn(geist.className)}>{children}</body>
     </html>
   );
