@@ -1,9 +1,15 @@
-import { NestFactory } from '@nestjs/core';
+import { fastify } from 'fastify';
 
-import { AppModule } from './app.module';
+const app = fastify();
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 4000);
-}
-bootstrap();
+const start = async () => {
+  try {
+    const address = await app.listen({ port: 4000 });
+    console.info(`Server is running at ${address}`);
+  } catch (error) {
+    app.log.error(error);
+    process.exit(1);
+  }
+};
+
+start();
