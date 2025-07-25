@@ -1,4 +1,6 @@
-import env from '@fastify/env';
+import { fastifyPlugin } from 'fastify-plugin';
+import type { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import { fastifyEnv } from '@fastify/env';
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -29,10 +31,14 @@ const schema = {
   },
 };
 
-export const autoConfig = {
-  confKey: 'config',
-  schema,
-  dotenv: true,
-};
+async function env(fastify: FastifyInstance, options: FastifyPluginOptions) {
+  await fastify.register(fastifyEnv, {
+    confKey: 'config',
+    schema,
+    dotenv: true,
+  });
+}
 
-export default env;
+export default fastifyPlugin(env, {
+  name: 'env',
+});
