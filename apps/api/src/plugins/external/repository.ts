@@ -1,6 +1,7 @@
-import { fastifyPlugin } from 'fastify-plugin';
 import type { FastifyInstance } from 'fastify';
-import { type DatabaseInstance, createConnection } from '@workspace/db';
+
+import { createConnection, type DatabaseInstance } from '@workspace/db';
+import { fastifyPlugin } from 'fastify-plugin';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -16,6 +17,6 @@ function repository(fastify: FastifyInstance) {
 }
 
 export default fastifyPlugin(repository, {
-  name: 'repository',
   dependencies: ['env'],
+  name: 'repository',
 });

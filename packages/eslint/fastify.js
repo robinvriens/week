@@ -2,10 +2,10 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import { config as baseConfig } from './base.js';
 
-export const nestJsConfig = tseslint.config(
+export const fastifyConfig = tseslint.config(
   ...baseConfig,
   {
-    ignores: ['eslint.config.mjs'],
+    ignores: ['eslint.config.js'],
   },
   {
     languageOptions: {
@@ -13,7 +13,7 @@ export const nestJsConfig = tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      ecmaVersion: 5,
+      ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
         projectService: true,

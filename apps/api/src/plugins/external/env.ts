@@ -1,41 +1,42 @@
-import { fastifyPlugin } from 'fastify-plugin';
-import type { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import type { FastifyInstance } from 'fastify';
+
 import { fastifyEnv } from '@fastify/env';
+import { fastifyPlugin } from 'fastify-plugin';
 
 declare module 'fastify' {
   export interface FastifyInstance {
     config: {
-      PORT: string;
-      NODE_ENV: 'development' | 'production' | 'test';
       DATABASE_URL: string;
+      NODE_ENV: 'development' | 'production' | 'test';
+      PORT: string;
     };
   }
 }
 
 const schema = {
-  type: 'object',
-  required: ['PORT', 'NODE_ENV', 'DATABASE_URL'],
   properties: {
-    PORT: {
-      type: 'string',
-      default: '3000',
-    },
-    NODE_ENV: {
-      type: 'string',
-      enum: ['development', 'production'],
-      default: 'development',
-    },
     DATABASE_URL: {
       type: 'string',
     },
+    NODE_ENV: {
+      default: 'development',
+      enum: ['development', 'production'],
+      type: 'string',
+    },
+    PORT: {
+      default: '3000',
+      type: 'string',
+    },
   },
+  required: ['PORT', 'NODE_ENV', 'DATABASE_URL'],
+  type: 'object',
 };
 
-async function env(fastify: FastifyInstance, options: FastifyPluginOptions) {
+async function env(fastify: FastifyInstance) {
   await fastify.register(fastifyEnv, {
     confKey: 'config',
-    schema,
     dotenv: true,
+    schema,
   });
 }
 

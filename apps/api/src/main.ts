@@ -1,5 +1,6 @@
 import fastify from 'fastify';
 import fp from 'fastify-plugin';
+
 import { app } from './app.js';
 
 const server = fastify();
@@ -16,4 +17,4 @@ const init = async () => {
   }
 };
 
-init();
+await init();
