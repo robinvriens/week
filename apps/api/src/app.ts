@@ -1,5 +1,6 @@
 import { fastifyAutoload } from '@fastify/autoload';
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import fastifyHealthcheck from 'fastify-healthcheck';
 import path from 'path';
 
 export const options = {
@@ -19,4 +20,6 @@ export async function app(
     dir: path.join(import.meta.dirname, 'plugins/external'),
     options: { ...opts },
   });
+
+  await fastify.register(fastifyHealthcheck);
 }

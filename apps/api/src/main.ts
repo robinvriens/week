@@ -3,7 +3,18 @@ import fp from 'fastify-plugin';
 
 import { app } from './app.js';
 
-const server = fastify();
+const server = fastify({
+  logger: {
+    transport: {
+      options: {
+        colorize: true,
+        ignore: 'pid,hostname',
+        translateTime: 'HH:MM:ss Z',
+      },
+      target: 'pino-pretty',
+    },
+  },
+});
 
 const init = async () => {
   try {
