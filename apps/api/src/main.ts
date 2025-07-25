@@ -1,15 +1,19 @@
-import { fastify } from 'fastify';
+import fastify from 'fastify';
+import fp from 'fastify-plugin';
+import { app } from './app.js';
 
-const app = fastify();
+const server = fastify();
 
-const start = async () => {
+const init = async () => {
   try {
-    const address = await app.listen({ port: 4000 });
-    console.info(`Server is running at ${address}`);
+    await server.register(fp(app));
+    await server.listen({
+      port: parseInt(server.config.PORT),
+    });
   } catch (error) {
-    app.log.error(error);
+    server.log.error(error);
     process.exit(1);
   }
 };
 
-start();
+init();
