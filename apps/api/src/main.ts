@@ -1,9 +1,20 @@
-import { NestFactory } from '@nestjs/core';
+import fastify from 'fastify';
+import fp from 'fastify-plugin';
 
-import { AppModule } from './app.module';
+import { app } from './app.js';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 4000);
-}
-bootstrap();
+const server = fastify();
+
+const init = async () => {
+  try {
+    await server.register(fp(app));
+    await server.listen({
+      port: parseInt(server.config.PORT),
+    });
+  } catch (error) {
+    server.log.error(error);
+    process.exit(1);
+  }
+};
+
+await init();

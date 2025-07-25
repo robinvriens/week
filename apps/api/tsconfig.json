@@ -1,7 +1,10 @@
 {
-  "extends": "@workspace/typescript/nestjs.json",
+  "extends": "@workspace/typescript/fastify.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": "./"
-  }
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
