@@ -1,5 +1,10 @@
 {
   "extends": "@workspace/typescript/fastify.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
