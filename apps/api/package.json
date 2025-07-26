@@ -8,7 +8,8 @@
     "start": "node dist/main.js",
     "dev": "tsc-watch --onSuccess \"node dist/main.js\"",
     "check-types": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@fastify/autoload": "^6.3.1",
