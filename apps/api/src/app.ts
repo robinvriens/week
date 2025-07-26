@@ -3,6 +3,8 @@ import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import fastifyHealthcheck from 'fastify-healthcheck';
 import path from 'path';
 
+import { routes } from './utils/route-builder.js';
+
 export const options = {
   ajv: {
     customOptions: {
@@ -17,9 +19,14 @@ export async function app(
   opts: FastifyPluginOptions,
 ) {
   await fastify.register(fastifyAutoload, {
-    dir: path.join(import.meta.dirname, 'plugins/external'),
+    dir: path.join(import.meta.dirname, 'plugins'),
     options: { ...opts },
   });
 
-  await fastify.register(fastifyHealthcheck);
+  await fastify.register(fastifyHealthcheck, { prefix: '/api' });
+
+  await fastify.register(routes, {
+    dir: path.join(import.meta.dirname, 'modules'),
+    prefix: '/api',
+  });
 }
